@@ -1,0 +1,250 @@
+<div class="container">
+  <div class="form-wrapper">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title >
+          Add Employee
+          <mat-icon color="primary">person_add</mat-icon>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="employeeForm">
+
+          <mat-accordion class="example-headers-align">
+            <!-- Personal data panel -->
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Personal data
+                </mat-panel-title>
+                <mat-panel-description>
+                  Enter your name, identity and startDate
+                  <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <!-- Identity -->
+              <mat-form-field>
+                <mat-label>Identity</mat-label>
+                <input matInput formControlName="identity" placeholder="Enter identity" type="text">
+                <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('required')">the field is
+                  required!</mat-error>
+                <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('minlength')">
+                  the identity must be at least 9 characters
+                </mat-error>
+                <mat-error *ngIf="this.employeeForm.get('identity')?.hasError('maxlength')">
+                  the identity must be at most 9 characters
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('identity')?.hasError('invalidIdentityFormat')">Invalid identity
+                  format</mat-error>
+
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName" placeholder="Enter first name" type="text">
+                <mat-error *ngIf="this.employeeForm.get('firstName')?.hasError('required')">the field is
+                  required!</mat-error>
+
+              </mat-form-field>
+
+              <!-- Last Name -->
+              <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName" placeholder="Enter last name" type="text">
+                <mat-error *ngIf="this.employeeForm.get('lastName')?.hasError('required')">the field is
+                  required!</mat-error>
+
+              </mat-form-field>
+
+
+              <mat-action-row>
+                <button mat-button color="primary" (click)="nextStep()">
+                  Next
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+
+            <!-- Birthdate and gender panel -->
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Birthdate and Gender
+                </mat-panel-title>
+                <mat-panel-description>
+                  Enter your birthdate and select your gender
+                  <mat-icon>event</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <!-- Date of Birth -->
+              <mat-form-field>
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="birthdatePicker" formControlName="dateOfBirth"
+                  placeholder="Choose your birthdate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="birthdatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #birthdatePicker></mat-datepicker>
+                <mat-error *ngIf="this.employeeForm.get('dateOfBirth')?.hasError('required')">the field is
+                  required!</mat-error>
+                <mat-error *ngIf="employeeForm.get('dateOfBirth')?.hasError('invalidDateOfBirth')">The date is
+                  incorrect!
+                  The
+                  company cannot hire an employee under the 18 year old!</mat-error>
+
+
+              </mat-form-field>
+
+              <!-- Gender -->
+              <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="maleOrFmale" placeholder="Select your gender">
+                  <mat-option value="0">Male</mat-option>
+                  <mat-option value="1">Female</mat-option>
+                </mat-select>
+                <mat-error *ngIf="this.employeeForm.get('maleOrFmale')?.hasError('required')">the field is
+                  required!</mat-error>
+
+              </mat-form-field>
+
+              <!-- Previous and next buttons -->
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">
+                  Previous
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-button color="primary" (click)="nextStep()">
+                  Next
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Start Date
+                </mat-panel-title>
+                <mat-panel-description>
+                  Enter startDate
+                  <mat-icon>date_range</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+
+
+
+              <!-- Start Date -->
+              <mat-form-field>
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Choose a date"
+                  readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="employeeForm.get('startDate')?.hasError('required')">the field is
+                  required!</mat-error>
+                <mat-error *ngIf="employeeForm.get('startDate')?.hasError('invalidStartDate')">Start date must be after
+                  the
+                  date of birth!</mat-error>
+              </mat-form-field>
+
+              <!-- Next button -->
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">
+                  Previous
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <button mat-button color="primary" (click)="nextStep()">
+                  Next
+                  <mat-icon>keyboard_arrow_right</mat-icon>
+
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+
+            <!-- Role Selection Panel -->
+            <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Role Selection
+                </mat-panel-title>
+                <mat-panel-description>
+                  Choose your roles and provide additional information
+                  <mat-icon>assignment</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <!-- Role selection form fields -->
+              <div formArrayName="employeeRoles"> <!-- FormArrayName directive -->
+                <div *ngFor="let roleGroup of employeeRolesFormArray.controls; let i = index" class="role-selection">
+                  <div [formGroupName]="i"> <!-- FormGroupName directive -->
+                    <mat-form-field>
+                      <mat-label>Select Role</mat-label>
+                      <mat-select placeholder="Choose a role" formControlName="roleName">
+                        <mat-option *ngFor="let role of rolesList" [value]="role.id">{{ role.name }}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="roleGroup.get('roleName')?.hasError('required')">The field is
+                        required!</mat-error>
+
+                    </mat-form-field>
+
+                    <mat-radio-group formControlName="isManagementRole">
+                      <mat-radio-button value="0">Management</mat-radio-button>
+                      <mat-radio-button value="1">Non-Management</mat-radio-button>
+                    </mat-radio-group>
+
+
+                    <mat-form-field>
+                      <mat-label>Entry Date</mat-label>
+                      <input matInput [matDatepicker]="picker" formControlName="entryDate"
+                        placeholder="Choose entry date" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error *ngIf="roleGroup.get('entryDate')?.hasError('required')">The field is
+                        required!</mat-error>
+                      <mat-error *ngIf="roleGroup.get('entryDate')?.hasError('startDateBeforeEntryDate')">Entry date
+                        must be
+                        after start date</mat-error>
+                    </mat-form-field>
+
+                    <!-- Remove Role button -->
+                    <button mat-icon-button color="warn" (click)="removeRole(i)">
+                      <mat-icon>remove_circle</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Button to add new role -->
+              <button mat-button color="primary" (click)="addRole()">
+                Add Role
+                <mat-icon>add</mat-icon>
+              </button>
+
+              <!-- Previous and submit buttons -->
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">
+                  Previous
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+
+                </button>
+              </mat-action-row>
+            </mat-expansion-panel>
+
+            <!-- Previous and submit buttons -->
+            <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">
+                Previous
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <button mat-button color="primary" (click)="submit()">
+                Submit
+                <mat-icon>save</mat-icon>
+              </button>
+            </mat-action-row>
+            <!-- </mat-expansion-panel> -->
+          </mat-accordion>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+.top {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  left:50px;
+  padding: 5px;
+}
+
+.download {
+  /* margin-top: auto;
+  margin-bottom: auto; */
+  margin-right: 12%;
+  font-size: 35px;
+  transition: all 0.1s ease;
+  display: inline-block; /* הוספת display כדי לאפשר סגירת גודל */
+  
+}
+
+.download:hover {
+  background-color: rgba(212, 220, 223, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.search {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 12%;
+  font-size: 35px;
+  transition: all 0.1s ease;
+  display: inline-block; /* הוספת display כדי לאפשר סגירת גודל */
+  color: #888;
+  padding: 0 10px;
+}
+
+.search:hover {
+  background-color: rgba(212, 220, 223, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.mat-elevation-z8 {
+  cursor: pointer;
+}
+
+/* הוספת רווח בין ה-ID לשאר העמודות */
+td.mat-cell:first-child {
+  padding-right: 20px;
+}
+
+/* כפתורי האייקונים - סידור קרוב יותר אחד לשני */
+.edit-cell button,
+.delete-cell button {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.edit-cell button:hover,
+.delete-cell button:hover {
+  background-color: rgba(212, 220, 223, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.search-container {
+  width: 78%;
+  height: 50px;
+  position: fixed;
+  margin-top: 10pt;
+  margin-right: 10pt;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #ccc;
+  padding: 0 30px;
+  position: relative;
+}
+
+.search-box {
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  direction: rtl;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.search-box:focus + .search::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  border-color: #2196f3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+.add-employee {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.add-icon {
+  font-size: 35px;
+  margin-right: 5px;
+}
+
+.add-employee:hover {
+  background-color: rgba(212, 220, 223, 0.5);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.add-employee:hover .add-icon {
+  animation: pulse 1s infinite; /* אנימציה של פלוס */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
